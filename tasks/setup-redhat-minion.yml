@@ -28,5 +28,5 @@
   register: myoutput
   delegate_to: "{{ salt_master_ip }}"
 
-- debug:
-    msg: "command out: {{ myoutput }}"  
+#- debug:
+#    msg: "command out: {{ myoutput }}"  

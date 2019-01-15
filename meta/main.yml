@@ -15,6 +15,7 @@ galaxy_info:
   galaxy_tags: 
     - salt
     - saltstack
-    - configuration manager
+    - configuration
+    - manager
 
 dependencies: []
