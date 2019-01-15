@@ -1,0 +1,18 @@
+- name: Add saltstack repository
+  yum_repository:
+    name: saltstack
+    description: SaltStack repo for Red Hat Enterprise Linux
+    baseurl: https://repo.saltstack.com/yum/redhat/$releasever/$basearch/latest
+    gpgcheck: yes
+    gpgkey:
+      - https://repo.saltstack.com/yum/redhat/$releasever/$basearch/latest/SALTSTACK-GPG-KEY.pub
+      - https://repo.saltstack.com/yum/redhat/$releasever/$basearch/latest/base/RPM-GPG-KEY-CentOS-7
+
+
+- name: include setup master tasks
+  include_tasks: setup-redhat-master.yml
+  when: salt_install_master
+
+- name: include setup minion tasks
+  include_tasks: setup-redhat-minion.yml
+  when: salt_install_minion

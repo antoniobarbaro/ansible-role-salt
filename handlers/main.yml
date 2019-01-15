@@ -1,0 +1,7 @@
+- name: restarted firewalld
+  service: name=firewalld
+           state=restarted  
+
+- name: restarted minion
+  service: name=salt-minion
+           state=restarted            

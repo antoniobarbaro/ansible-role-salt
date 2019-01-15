@@ -1,0 +1,32 @@
+- name: Install salt minion package
+  yum: name={{ item }} state=latest
+  with_items:
+      - salt-minion
+
+- name: Enable and start salt minion
+  service:
+    name: salt-minion
+    state: started
+    enabled: yes
+
+- name: configure salt master ip
+  lineinfile:
+    path: /etc/salt/minion
+    regexp: '^master:'
+    line: 'master: {{ salt_master_ip }}'
+    insertafter: '^#master:'
+  notify: restarted minion
+
+- name: set minion name
+  copy: 
+    content: "{{ salt_minion_name }}" 
+    dest: /etc/salt/minion_id
+  notify: restarted minion
+
+- name: accept minion key by master
+  command: salt-key -y --accept={{ salt_minion_name }}
+  register: myoutput
+  delegate_to: "{{ salt_master_ip }}"
+
+- debug:
+    msg: "command out: {{ myoutput }}"  

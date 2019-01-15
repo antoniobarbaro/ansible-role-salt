@@ -1,0 +1,32 @@
+- name: Install salt server packages
+  yum: name={{ item }} state=latest
+  with_items:
+      - salt-master
+#      - salt-ssh
+#      - salt-syndic
+#      - salt-cloud
+
+- name: Enable and start salt server
+  service:
+    name: salt-master
+    state: started
+    enabled: yes
+
+- name: install firewalld
+  yum: 
+    name: firewalld
+    state: present
+
+- name: firewall enable port 4505
+  firewalld:
+    port: 4505/tcp
+    permanent: true
+    state: enabled  
+  notify: restarted firewalld   
+
+- name: firewall enable port 4506
+  firewalld:
+    port: 4506/tcp
+    permanent: true
+    state: enabled  
+  notify: restarted firewalld   
