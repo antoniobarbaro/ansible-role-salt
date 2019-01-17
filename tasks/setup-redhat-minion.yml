@@ -28,5 +28,6 @@
   register: myoutput
   delegate_to: "{{ salt_master_ip }}"
 
-#- debug:
-#    msg: "command out: {{ myoutput }}"  
+- name: debug accept minion key by master
+  debug:
+    msg: "command out: {{ myoutput }}"  
