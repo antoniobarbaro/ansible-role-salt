@@ -23,6 +23,9 @@
     dest: /etc/salt/minion_id
   notify: restarted minion
 
+- name: force restart minion if name changed
+  meta: flush_handlers
+
 - name: accept minion key by master
   command: salt-key -y --accept={{ salt_minion_name }}
   register: myoutput
