@@ -1,6 +1,6 @@
 ---
 # defaults file for salt
 salt_install_master: false
-salt_install_minion: true
+salt_install_minion: false
 salt_master_ip: 'localhost'
 salt_minion_name: 'minion1'
